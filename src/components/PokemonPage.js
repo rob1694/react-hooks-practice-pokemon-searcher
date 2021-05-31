@@ -24,6 +24,17 @@ function PokemonPage() {
     setPokemons([...pokemons, newPokemon]);
   }
 
+  function deletePokemon(pokemonId) {
+    const newURL = `${URL}/${pokemonId}`;
+    const config = { method: "DELETE" };
+    fetch(newURL, config)
+      .then(r => r.json())
+      .then(() => {
+        const deletePokemons = pokemons.filter(p => p.id !== pokemonId);
+        setPokemons(deletePokemons);
+      })
+  }
+
   const pokemonsToDisplay = pokemons.filter((pokemon) =>
   pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
 );
@@ -36,7 +47,7 @@ function PokemonPage() {
       <br />
       <Search searchTerm={searchTerm} onChangeSearch={setSearchTerm} />
       <br />
-      <PokemonCollection pokemons={pokemonsToDisplay} />
+      <PokemonCollection pokemons={pokemonsToDisplay} deletePokemon = {deletePokemon}/>
     </Container>
   );
 }

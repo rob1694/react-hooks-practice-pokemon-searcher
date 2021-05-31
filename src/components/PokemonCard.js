@@ -12,6 +12,10 @@ function PokemonCard({ pokemon, deletePokemon }) {
     setShowFront((showFront) => !showFront);
   }
 
+  function handleDeletePokemon() {
+    deletePokemon(pokemon.id)
+  }
+
   return (
     <Card>
       <div onClick = {handleClick}>
@@ -28,7 +32,7 @@ function PokemonCard({ pokemon, deletePokemon }) {
           </span>
         </div>
       </div>
-        <button onClick = {deletePokemon}>Delete</button>
+        <button onClick = {handleDeletePokemon}>Delete</button>
     </Card>
   );
 }
